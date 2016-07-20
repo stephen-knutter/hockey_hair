@@ -1,5 +1,5 @@
 $(function(){
-  $(".info").on("mouseenter", function(){
+  $("body").on("mouseenter", ".info", function(){
     $this = $(this);
     var pInfo = $this.attr('id');
     var aInfo = pInfo.split("|");
@@ -7,22 +7,22 @@ $(function(){
     var pTeam = aInfo[2] + ' ' + aInfo[3];
     var pYear = aInfo[4];
 
-    //console.log(pName + '-' + pTeam + '-' + pYear);
-
     var offset = $this.offset();
     var oLeft = offset.left;
     var oTop = offset.top;
 
-    var nElem = ("<div class='tip'>");
-    var nName = ("<p class='name'></p>");
-    var nTeam = ("<p class='team'>");
-    var nYear = ("<p class='year'>");
+    $("body")
+      .append("<div class='tip'><p>"+pName+"</p><p class='name'>"+pTeam+"</p><p>"+pYear+"</p></div>");
+    $(".tip")
+      .css({'position':'absolute', 'top': oTop - 50+"px", 'left':oLeft + 60+"px"});
+  })
 
-    nName.html(pName);
-    nTeam.html(pTeam);
-    nYear.html(pYear);
-    nElem.html(nName+nTeam+nElem);
+  var timeout = setTimeout(function(){
 
-    $("body").append(nElem).css({'position':'absolute', 'top':oTop - 5+"px", 'left':oLeft - 10+"px"});
+  },300);
+
+  $("body").on("mouseleave", ".info", function(){
+    $this = $(this);
+    $("div.tip").remove();
   })
 })
