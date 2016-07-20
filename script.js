@@ -1,5 +1,8 @@
 $(function(){
+  var timeoutId = null;
   $("body").on("mouseenter", ".info", function(){
+    if(timeoutId) clearTimeout(timeoutId);
+    $(".tip").remove();
     $this = $(this);
     var pInfo = $this.attr('id');
     var aInfo = pInfo.split("|");
@@ -17,12 +20,19 @@ $(function(){
       .css({'position':'absolute', 'top': oTop - 50+"px", 'left':oLeft + 60+"px"});
   })
 
-  var timeout = setTimeout(function(){
-
-  },300);
-
   $("body").on("mouseleave", ".info", function(){
-    $this = $(this);
-    $("div.tip").remove();
+    if(timeoutId) clearTimeout(timeoutId);
+    timeoutId = setTimeout(function(){
+      $(".tip").remove();
+    },150)
+  })
+
+  $("body").on("mouseenter", ".tip", function(){
+    if(timeoutId) clearTimeout(timeoutId);
+  });
+
+  $("body").on("mouseleave", ".tip", function(){
+    $(".tip").remove();
+    if(timeoutId) clearTimeout(timeoutId);
   })
 })
