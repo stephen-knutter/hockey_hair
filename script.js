@@ -1,4 +1,5 @@
 $(function(){
+  //DISPLAY USER INFO TOOLTIP ON HOVER
   var timeoutId = null;
   $("body").on("mouseenter", ".info", function(){
     if(timeoutId) clearTimeout(timeoutId);
@@ -20,6 +21,7 @@ $(function(){
       .css({'position':'absolute', 'top': oTop - 50+"px", 'left':oLeft + 60+"px"});
   })
 
+  //CLEAR AND SET TIMEOUT MOUSE LEAVING PIC
   $("body").on("mouseleave", ".info", function(){
     if(timeoutId) clearTimeout(timeoutId);
     timeoutId = setTimeout(function(){
@@ -27,10 +29,12 @@ $(function(){
     },150)
   })
 
+  //IF MOUSE ENTERS TOOLTIP REMOVE THE TIMEOUT
   $("body").on("mouseenter", ".tip", function(){
     if(timeoutId) clearTimeout(timeoutId);
   });
 
+  //IF MOUSE LEAVES TOOLTIP CLOSE IT
   $("body").on("mouseleave", ".tip", function(){
     $(".tip").remove();
     if(timeoutId) clearTimeout(timeoutId);
